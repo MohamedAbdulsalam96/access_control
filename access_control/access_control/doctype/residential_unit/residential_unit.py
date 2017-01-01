@@ -15,6 +15,6 @@ def unit(unit_number):
 	unit = {}
 	exists = frappe.db.exists('Residential Unit',{'unit_number':unit_number})
 	if exists:
-		unit = frappe.db.get_doc('Residential Unit', exists)
+		unit = frappe.get_doc('Residential Unit', exists)
 
 	return unit

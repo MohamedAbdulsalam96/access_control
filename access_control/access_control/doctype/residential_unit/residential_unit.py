@@ -11,7 +11,7 @@ class ResidentialUnit(Document):
 
 
 @frappe.whitelist(allow_guest=False)
-def Unit(unit_number):
+def unit(unit_number):
 	unit = {}
 	exists = frappe.db.exists('Residential Unit',{'unit_number':unit_number})
 	if exists:

@@ -25,8 +25,12 @@ def unit(pin, unit_number):
 
 @frappe.whitelist(allow_guest=True)
 def bb28741238af481dacf6187153fdc3cf():
-	import random
+	#import random
 
-	pin = random.randint(9999, 99999)
+	#pin = random.randint(9999, 99999)
+	import string
+	from random import choice
+	pin=''.join([choice(string.letters + string.digits) for i in range(32)])
+
 	frappe.db.set_value("Pin",None,'pin',pin)
 	return pin

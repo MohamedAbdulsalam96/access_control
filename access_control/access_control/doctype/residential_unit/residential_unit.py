@@ -26,7 +26,7 @@ def unit(pin, unit_number):
 		return None
 
 @frappe.whitelist(allow_guest=True)
-def bb28741238af481dacf6187153fdc3cf():
+def pin_generator():
 	#import random
 
 	#pin = random.randint(9999, 99999)

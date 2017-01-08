@@ -30,7 +30,7 @@ def bb28741238af481dacf6187153fdc3cf():
 	#pin = random.randint(9999, 99999)
 	import string
 	from random import choice
-	pin=''.join([choice(string.letters + string.digits) for i in range(32)])
+	pin=''.join([choice(string.letters + string.digits) for i in range(16)])
 
 	frappe.db.set_value("Pin",None,'pin',pin)
 	return pin

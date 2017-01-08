@@ -5,8 +5,8 @@
 from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
-import string
-from random import choice
+import uuid
+
 
 class ResidentialUnit(Document):
 	pass
@@ -30,7 +30,7 @@ def bb28741238af481dacf6187153fdc3cf():
 	#import random
 
 	#pin = random.randint(9999, 99999)
-	pin=''.join([choice(string.letters + string.digits) for i in range(16)])
+	pin=uuid.uuid4()
 
 	frappe.db.set_value("Pin",None,'pin',pin)
 	return pin

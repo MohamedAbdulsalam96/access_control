@@ -12,7 +12,7 @@ class ResidentialUnit(Document):
 
 @frappe.whitelist(allow_guest=True)
 def unit(pin, unit_number):
-	pin_stored = frappe.db.get_doc("Pin")
+	pin_stored = frappe.get_doc("Pin")
 	if pin_stored.pin == pin:
 		unit = {}
 		exists = frappe.db.exists('Residential Unit',{'unit_number':unit_number})

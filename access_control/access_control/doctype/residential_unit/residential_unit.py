@@ -30,7 +30,7 @@ def bb28741238af481dacf6187153fdc3cf():
 	#import random
 
 	#pin = random.randint(9999, 99999)
-	pin=uuid.uuid4()
+	pin=str(uuid.uuid4())
 
 	frappe.db.set_value("Pin",None,'pin',pin)
 	return pin

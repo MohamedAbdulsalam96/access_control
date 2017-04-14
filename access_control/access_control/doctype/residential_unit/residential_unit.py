@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 import uuid
+import xml.etree.cElementTree as ET
 
 
 class ResidentialUnit(Document):
@@ -26,16 +27,27 @@ def unit(pin, unit_number):
 		return None
 
 @frappe.whitelist(allow_guest=True)
-def call_unit(CLID,From,To, CallStatus):
+def call_unit(CLID,From,To, CallStatus, CallerName):
 
 	pin_stored = frappe.get_doc("Pin")
 
 	if pin_stored.pin == To.split('|')[0].split(':')[1]:
-		params = {}
-		params['to'] = 'sip:' + To.split('|')[1]
-		params['clid'] = CLID
-		params['frm']= From
-		return params
+		if CallStatus == 'ringing':
+			response = ET.Element("Response")
+			dial = ET.SubElement(response, "Dial")
+			dial.set('callerId', CLID)
+			dial.set('callerName', CallerName)
+			dial.set('digitsmatch', '9')
+			ET.SubElement(dial, "User").text = 'sip:' + To.split('|')[1]
+
+			tree = ET.ElementTree(response)
+			return tree
+
+		#params = {}
+		#params['to'] = 'sip:' + To.split('|')[1]
+		#params['clid'] = CLID
+		#params['frm']= From
+		#return params
 	else:
 		return None
 

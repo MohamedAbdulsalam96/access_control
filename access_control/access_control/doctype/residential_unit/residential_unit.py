@@ -26,18 +26,18 @@ def unit(pin, unit_number):
 		return None
 
 @frappe.whitelist(allow_guest=True)
-def call_unit(CLID,From,To):
-	#pin_stored = frappe.get_doc("Pin")
+def call_unit(CLID,From,To, HangupCause ):
 
-	#if pin_stored.pin == pin:
-	#	return params
-	#else:
-	#	return None
-	params = {}
-	params['to'] = To
-	params['clid'] = CLID
-	params['frm']= From
-	return params
+	pin_stored = frappe.get_doc("Pin")
+
+	if pin_stored.pin == To.split('|')[0]:
+		params = {}
+		params['to'] = To.split('|')[1]
+		params['clid'] = CLID
+		params['frm']= From
+		return params
+	else:
+		return None
 
 
 @frappe.whitelist(allow_guest=True)

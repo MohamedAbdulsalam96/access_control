@@ -30,9 +30,9 @@ def call_unit(CLID,From,To, CallStatus):
 
 	pin_stored = frappe.get_doc("Pin")
 
-	if pin_stored.pin == To.split('|')[0]:
+	if pin_stored.pin == To.split('|')[0].split(':')[1]:
 		params = {}
-		params['to'] = To.split('|')[1]
+		params['to'] = 'sip:' + To.split('|')[1]
 		params['clid'] = CLID
 		params['frm']= From
 		return params

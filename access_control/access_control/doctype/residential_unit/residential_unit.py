@@ -31,7 +31,7 @@ def call_unit(pin, params):
 	pin_stored = frappe.get_doc("Pin")
 
 	if pin_stored.pin == pin:
-		return params
+		return params['To']
 	else:
 		return None
 

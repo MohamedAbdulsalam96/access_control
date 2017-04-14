@@ -41,7 +41,8 @@ def call_unit(CLID,From,To, CallStatus, CallerName):
 
 			#tree = ElementTree(response)
 			return tostring(response)
-
+		else:
+			return None
 		#params = {}
 		#params['to'] = 'sip:' + To.split('|')[1]
 		#params['clid'] = CLID

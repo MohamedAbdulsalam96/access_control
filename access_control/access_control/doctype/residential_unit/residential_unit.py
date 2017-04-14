@@ -34,9 +34,9 @@ def call_unit(CLID,From,To):
 	#else:
 	#	return None
 	params = {}
-	params.to = To
-	params.clid = CLID
-	params.frm = From
+	params['to'] = To
+	params['clid'] = CLID
+	params['frm']= From
 	return params
 
 

@@ -26,7 +26,7 @@ def unit(pin, unit_number):
 		return None
 
 @frappe.whitelist(allow_guest=True)
-def call_unit(CLID,From,To, HangupCause ):
+def call_unit(CLID,From,To, CallStatus):
 
 	pin_stored = frappe.get_doc("Pin")
 

@@ -6,7 +6,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 import uuid
-import xml.etree.ElementTree as ET
+import xml.etree.cElementTree as ET
 
 class ResidentialUnit(Document):
 	pass

@@ -34,4 +34,5 @@ def bb28741238af481dacf6187153fdc3cf():
 	pin=str(uuid.uuid4())
 
 	frappe.db.set_value("Pin",None,'pin',pin)
+	frappe.db.commit()
 	return pin

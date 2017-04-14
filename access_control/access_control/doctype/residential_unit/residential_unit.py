@@ -41,7 +41,7 @@ def call_unit(CLID,From,To, CallStatus, CallerName):
 			ET.SubElement(dial, "User").text = 'sip:' + To.split('|')[1]
 
 			tree = ET.ElementTree(response)
-			return tree
+			return str(tree)
 
 		#params = {}
 		#params['to'] = 'sip:' + To.split('|')[1]

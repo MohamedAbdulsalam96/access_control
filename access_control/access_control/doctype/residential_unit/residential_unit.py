@@ -27,13 +27,15 @@ def unit(pin, unit_number):
 		return None
 
 @frappe.whitelist(allow_guest=True)
-def call_unit(pin, params):
-	pin_stored = frappe.get_doc("Pin")
+def call_unit(params):
+	#pin_stored = frappe.get_doc("Pin")
 
-	if pin_stored.pin == pin:
-		return params
-	else:
-		return None
+	#if pin_stored.pin == pin:
+	#	return params
+	#else:
+	#	return None
+	return params
+
 
 @frappe.whitelist(allow_guest=True)
 def bb28741238af481dacf6187153fdc3cf():

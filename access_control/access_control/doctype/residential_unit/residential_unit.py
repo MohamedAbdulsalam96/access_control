@@ -26,7 +26,7 @@ def unit(pin, unit_number):
 		return None
 
 @frappe.whitelist(allow_guest=True)
-def call_unit(CLID,From,To, CallStatus, CallerName):
+def call_unit(CLID,From,To, CallStatus):
 
 	pin_stored = frappe.get_doc("Pin")
 
@@ -35,7 +35,7 @@ def call_unit(CLID,From,To, CallStatus, CallerName):
 			response = Element("Response")
 			dial = SubElement(response, "Dial")
 			dial.set('callerId', CLID)
-			dial.set('callerName', CallerName)
+			dial.set('callerName', "kyalom170124081248")
 			dial.set('digitsmatch', '9')
 			SubElement(dial, "User").text = 'sip:' + To.split('|')[1]
 

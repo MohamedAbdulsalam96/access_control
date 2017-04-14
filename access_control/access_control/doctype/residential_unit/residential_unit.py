@@ -6,8 +6,7 @@ from __future__ import unicode_literals
 import frappe
 from frappe.model.document import Document
 import uuid
-import xml.etree.cElementTree as ET
-
+import xml.etree.ElementTree as ET
 
 class ResidentialUnit(Document):
 	pass
@@ -41,7 +40,7 @@ def call_unit(CLID,From,To, CallStatus, CallerName):
 			ET.SubElement(dial, "User").text = 'sip:' + To.split('|')[1]
 
 			tree = ET.ElementTree(response)
-			return str(tree)
+			return ET.tostring(tree, encoding='utf8', method='xml')
 
 		#params = {}
 		#params['to'] = 'sip:' + To.split('|')[1]

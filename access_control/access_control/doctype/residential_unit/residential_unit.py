@@ -11,7 +11,6 @@ import uuid
 class ResidentialUnit(Document):
 	pass
 
-
 @frappe.whitelist(allow_guest=True)
 def unit(pin, unit_number):
 	pin_stored = frappe.get_doc("Pin")
@@ -27,14 +26,18 @@ def unit(pin, unit_number):
 		return None
 
 @frappe.whitelist(allow_guest=True)
-def call_unit(Params):
+def call_unit(CLID,From,To):
 	#pin_stored = frappe.get_doc("Pin")
 
 	#if pin_stored.pin == pin:
 	#	return params
 	#else:
 	#	return None
-	return Params
+	params = {}
+	params.to = To
+	params.clid = CLID
+	params.frm = From
+	return params
 
 
 @frappe.whitelist(allow_guest=True)

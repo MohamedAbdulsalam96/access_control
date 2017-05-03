@@ -51,6 +51,15 @@ def call_unit(CLID,From,To, CallStatus):
 	else:
 		return None
 
+@frappe.whitelist(allow_guest=True)
+def test_xml():
+    from werkzeug.wrappers import Response
+    response = Response()
+    response.mimetype = 'text/xml'
+    response.charset = 'utf-8'
+    response.data = '<xml></xml>'
+
+    return response
 
 @frappe.whitelist(allow_guest=True)
 def bb28741238af481dacf6187153fdc3cf():

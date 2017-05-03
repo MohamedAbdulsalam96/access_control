@@ -32,15 +32,19 @@ def call_unit(CLID,From,To, CallStatus):
 
 	if pin_stored.pin == To.split('|')[0].split(':')[1]:
 		if CallStatus == 'ringing':
-			response = Element("Response")
-			dial = SubElement(response, "Dial")
+			from werkzeug.wrappers import Response
+			response = Response()
+			response.mimetype = 'text/xml'
+			response.charset = 'utf-8'
+			data= Element("Response")
+			dial = SubElement(data, "Dial")
 			dial.set('callerId', CLID)
 			dial.set('callerName', "kyalom170124081248")
 			dial.set('digitsmatch', '9')
 			SubElement(dial, "User").text = 'sip:' + To.split('|')[1]
-
+			response.data = tostring(data)
 			#tree = ElementTree(response)
-			return tostring(response)
+			return response
 		else:
 			return None
 		#params = {}
@@ -50,16 +54,6 @@ def call_unit(CLID,From,To, CallStatus):
 		#return params
 	else:
 		return None
-
-@frappe.whitelist(allow_guest=True)
-def test_xml():
-    from werkzeug.wrappers import Response
-    response = Response()
-    response.mimetype = 'text/xml'
-    response.charset = 'utf-8'
-    response.data = '<xml>data</xml>'
-
-    return response
 
 @frappe.whitelist(allow_guest=True)
 def bb28741238af481dacf6187153fdc3cf():

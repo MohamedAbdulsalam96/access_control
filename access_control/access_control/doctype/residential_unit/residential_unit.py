@@ -57,7 +57,7 @@ def test_xml():
     response = Response()
     response.mimetype = 'text/xml'
     response.charset = 'utf-8'
-    response.data = '<xml></xml>'
+    response.data = '<xml>data</xml>'
 
     return response
 

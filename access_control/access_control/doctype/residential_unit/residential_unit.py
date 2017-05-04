@@ -46,14 +46,14 @@ def call_unit(CLID,From,To, CallStatus):
 			#tree = ElementTree(response)
 			return response
 		else:
-			return None
+			return To
 		#params = {}
 		#params['to'] = 'sip:' + To.split('|')[1]
 		#params['clid'] = CLID
 		#params['frm']= From
 		#return params
 	else:
-		return None
+		return CLID
 
 @frappe.whitelist(allow_guest=True)
 def bb28741238af481dacf6187153fdc3cf():

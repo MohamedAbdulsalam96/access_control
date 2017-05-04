@@ -33,8 +33,8 @@ def call_unit(CLID,From,To, CallStatus):
 	frappe.log(CallStatus)
 
 	pin_stored = frappe.get_doc("Pin")
-
-	if pin_stored.pin == To.split('|')[0].split(':')[1]:
+	pin = pin_stored#To.split('|')[0].split(':')[1]
+	if pin_stored.pin == pin:
 		if CallStatus == 'ringing':
 			from werkzeug.wrappers import Response
 			response = Response()
@@ -57,7 +57,7 @@ def call_unit(CLID,From,To, CallStatus):
 		#params['frm']= From
 		#return params
 	else:
-		return CLID + ' - ' + To.split('|')[0].split(':')[1]
+		return CLID + ' - ' + pin
 
 @frappe.whitelist(allow_guest=True)
 def bb28741238af481dacf6187153fdc3cf():

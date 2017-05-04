@@ -45,7 +45,7 @@ def call_unit(CLID,From,To, CallStatus):
 			dial.set('callerId', CLID)
 			dial.set('callerName', "kyalom170124081248")
 			dial.set('digitsmatch', '9')
-			SubElement(dial, "User").text = 'sip:' + To.split('|')[1]
+			SubElement(dial, "User").text = To#'sip:' + To.split('|')[1]
 			response.data = tostring(data)
 			#tree = ElementTree(response)
 			return response

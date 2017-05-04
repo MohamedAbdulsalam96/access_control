@@ -27,13 +27,8 @@ def unit(pin, unit_number):
 
 @frappe.whitelist(allow_guest=True)
 def call_unit(CLID,From,To, CallStatus):
-	frappe.log(CLID)
-	frappe.log(From)
-	frappe.log(To)
-	frappe.log(CallStatus)
-
 	pin_stored = frappe.get_doc("Pin")
-	pin = pin_stored.pin#To.split('|')[0].split(':')[1]
+	pin = To.split('|')[0].split(':')[1]
 	if pin_stored.pin == pin:
 		if CallStatus == 'ringing':
 			from werkzeug.wrappers import Response
@@ -45,7 +40,7 @@ def call_unit(CLID,From,To, CallStatus):
 			dial.set('callerId', CLID)
 			dial.set('callerName', "kyalom170124081248")
 			dial.set('digitsmatch', '9')
-			SubElement(dial, "User").text = To#'sip:' + To.split('|')[1]
+			SubElement(dial, "User").text ='sip:' + To.split('|')[1]
 			response.data = tostring(data)
 			#tree = ElementTree(response)
 			return response

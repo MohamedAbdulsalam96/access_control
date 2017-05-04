@@ -20,7 +20,7 @@ app_license = "MIT"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/access_control/css/access_control.css"
-web_include_js = "http://s3.amazonaws.com/plivosdk/web/plivo.min.js"
+web_include_js = "https://s3.amazonaws.com/plivosdk/web/plivo.min.js"
                   #  "/files/static/jquery.js"]
 
 # Home Pages

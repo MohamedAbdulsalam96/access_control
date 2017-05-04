@@ -27,7 +27,11 @@ def unit(pin, unit_number):
 
 @frappe.whitelist(allow_guest=True)
 def call_unit(CLID,From,To, CallStatus):
-
+	frappe.log(CLID)
+	frappe.log(From)
+	frappe.log(To)
+	frappe.log(CallStatus)
+	
 	pin_stored = frappe.get_doc("Pin")
 
 	if pin_stored.pin == To.split('|')[0].split(':')[1]:

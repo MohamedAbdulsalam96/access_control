@@ -33,7 +33,7 @@ def call_unit(CLID,From,To, CallStatus):
 	frappe.log(CallStatus)
 
 	pin_stored = frappe.get_doc("Pin")
-	pin = pin_stored#To.split('|')[0].split(':')[1]
+	pin = pin_stored.pin#To.split('|')[0].split(':')[1]
 	if pin_stored.pin == pin:
 		if CallStatus == 'ringing':
 			from werkzeug.wrappers import Response

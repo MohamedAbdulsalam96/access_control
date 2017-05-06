@@ -24,7 +24,9 @@ def unit(pin, unit_number):
 					order by idx desc""", {"name": exists}, as_dict=True)
 			#unit = frappe.get_doc('Residential Unit', exists)
 
-		return "done"#residents #unit.residents
+			return "done"#residents #unit.residents
+		else:
+			return None
 	else:
 		return None
 

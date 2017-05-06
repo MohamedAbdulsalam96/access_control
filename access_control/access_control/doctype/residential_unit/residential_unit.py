@@ -19,9 +19,12 @@ def unit(pin, unit_number):
 		unit = {}
 		exists = frappe.db.exists('Residential Unit',{'unit_number':unit_number})
 		if exists:
-			unit = frappe.get_doc('Residential Unit', exists)
+			residents = frappe.db.sql("""select name, contact_type, contact, shown_as from `tabResident`
+					where parent=%(name)s
+					order by idx desc""", {"name": exists}, as_dict=True)
+			#unit = frappe.get_doc('Residential Unit', exists)
 
-		return unit.residents
+		return residents #unit.residents
 	else:
 		return None
 

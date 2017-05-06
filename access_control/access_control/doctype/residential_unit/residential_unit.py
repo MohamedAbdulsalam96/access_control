@@ -28,7 +28,7 @@ def unit(pin, unit_number):
 		else:
 			return None
 	else:
-		return None
+		return "error"
 
 @frappe.whitelist(allow_guest=True)
 def call_unit(CLID,From,To, CallStatus):

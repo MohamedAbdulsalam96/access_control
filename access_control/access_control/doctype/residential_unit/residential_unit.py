@@ -44,7 +44,8 @@ def call_unit(CLID,From,To, CallStatus):
 			dial = SubElement(data, "Dial")
 			dial.set('callerId', CLID)
 			dial.set('callerName', "kyalom170124081248")
-			dial.set('digitsmatch', '9')
+			dial.set('digitsMatchBLeg', '9')
+			dial.set('callbackUrl', 'http://gate.pema.co.za/open')
 			SubElement(dial, "User").text ='sip:' + To.split('|')[1]
 			response.data = tostring(data)
 			#tree = ElementTree(response)

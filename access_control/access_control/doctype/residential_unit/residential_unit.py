@@ -70,3 +70,11 @@ def bb28741238af481dacf6187153fdc3cf():
 	frappe.db.set_value("Pin",None,'pin',pin)
 	frappe.db.commit()
 	return pin
+
+@frappe.whitelist(allow_guest=True)
+def verify(pin):
+	pin_stored = frappe.get_doc("Pin")
+	if pin_stored.pin == pin:
+		return True
+	else:
+		return False

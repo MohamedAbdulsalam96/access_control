@@ -82,7 +82,7 @@ def verify(pin):
 
 @frappe.whitelist(allow_guest=True)
 def verify_number(number):
-	exists = frappe.db.exists('Residential Unit', {'contact': number})
+	exists = frappe.db.exists('Residential', {'contact': number})
 	if exists:
 		return True
 	else:

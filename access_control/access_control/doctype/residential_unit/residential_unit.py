@@ -93,7 +93,7 @@ def verify_number(number):
 def unit_list(pin):
 	pin_stored = frappe.get_doc("Pin")
 	if pin_stored.pin == pin:
-		_list = frappe.get_all('Residential Unit', fields=['unit_number'])
+		_list = frappe.get_all('Residential Unit', fields=['unit_number', 'exit_pin'])
 		return _list
 	else:
 		return None

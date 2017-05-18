@@ -85,9 +85,11 @@ def verify_number(number):
 	exists = frappe.db.exists('Resident', {'contact': number})
 	#return exists
 	if exists:
-		return True
+		resident = frappe.get_doc('Resident', exists)
+		unit = frappe.get_doc('Residential Unit', resident.parent)
+		return unit.unit_number
 	else:
-		return False
+		return None
 
 @frappe.whitelist(allow_guest=True)
 def unit_list(pin):

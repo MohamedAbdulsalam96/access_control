@@ -7,10 +7,12 @@ import frappe
 from frappe.model.document import Document
 import uuid
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
+from random import randint
 
 class ResidentialUnit(Document):
 	def generate_pin(self):
-		frappe.msgprint("Pin Generated")
+		frappe.msgprint("Pin Generated: " + randint(10000, 99999))
+
 
 
 

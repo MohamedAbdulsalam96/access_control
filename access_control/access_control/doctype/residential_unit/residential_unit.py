@@ -99,3 +99,7 @@ def unit_list(pin):
 		return _list
 	else:
 		return None
+
+
+def generate_pin():
+	frappe.msgprint("Pin Generated")

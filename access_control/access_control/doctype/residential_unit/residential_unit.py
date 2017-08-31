@@ -9,7 +9,8 @@ import uuid
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 
 class ResidentialUnit(Document):
-	pass
+	def generate_pin(self):
+		frappe.msgprint("Pin Generated")
 
 @frappe.whitelist(allow_guest=True)
 def unit(pin, unit_number):
@@ -100,6 +101,3 @@ def unit_list(pin):
 	else:
 		return None
 
-
-def generate_pin(self):
-	frappe.msgprint("Pin Generated")

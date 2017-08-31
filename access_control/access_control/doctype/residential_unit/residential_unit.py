@@ -12,6 +12,8 @@ class ResidentialUnit(Document):
 	def generate_pin(self):
 		frappe.msgprint("Pin Generated")
 
+
+
 @frappe.whitelist(allow_guest=True)
 def unit(pin, unit_number):
 	pin_stored = frappe.get_doc("Pin")

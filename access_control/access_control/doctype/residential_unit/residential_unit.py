@@ -101,5 +101,5 @@ def unit_list(pin):
 		return None
 
 
-def generate_pin():
+def generate_pin(self):
 	frappe.msgprint("Pin Generated")

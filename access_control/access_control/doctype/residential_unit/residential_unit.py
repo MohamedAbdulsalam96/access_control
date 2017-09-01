@@ -28,6 +28,7 @@ class ResidentialUnit(Document):
 		#self.save()
 
 def check_expired():
+	frappe.logger().debug('Checking Expired pins...')
 	for d in frappe.db.sql("""select name, start_from, expires_on, expired
 			from `tabResidential Unit`
 			where expired = 0""", as_dict=1):
@@ -39,6 +40,7 @@ def check_expired():
 		frappe.errprint(frappe.utils.date_diff(today, d.expires_on))
 		if frappe.utils.date_diff(today, d.expires_on) >=1:
 			frappe.set_value("Residential Unit",d.name,"expired",1)
+			frappe.db.commit()
 
 
 @frappe.whitelist(allow_guest=True)

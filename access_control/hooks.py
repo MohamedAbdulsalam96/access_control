@@ -89,7 +89,7 @@ scheduler_events = {
 # 	"daily": [
 # 		"access_control.tasks.daily"
 # 	],
-	"hourly": [
+	"all": [
  		"access_control.access_control.doctype.residential_unit.residential_unit.check_expired"
  	]
 # 	"weekly": [

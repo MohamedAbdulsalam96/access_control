@@ -11,7 +11,7 @@ from random import randint
 
 class ResidentialUnit(Document):
 	def generate_pin(self):
-		print self
+		frappe.errprint(self)
 		frappe.msgprint("Pin Generated: " + str(randint(10000, 99999)))
 
 

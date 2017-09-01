@@ -11,9 +11,8 @@ from random import randint
 
 class ResidentialUnit(Document):
 	def generate_pin(self):
+		frappe.msgprint(self)
 		frappe.msgprint("Pin Generated: " + str(randint(10000, 99999)))
-
-
 
 
 @frappe.whitelist(allow_guest=True)

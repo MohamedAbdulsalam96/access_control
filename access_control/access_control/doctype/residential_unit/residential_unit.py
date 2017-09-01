@@ -11,9 +11,12 @@ from random import randint
 
 class ResidentialUnit(Document):
 	def generate_pin(self):
-		frappe.errprint(self)
-		frappe.msgprint("Pin Generated: " + str(randint(10000, 99999)))
-
+		frappe.errprint(self.exit_pin)
+		self.entry_pin = randint(10000, 99999)
+		self.start_from = frappe.utils.now()
+		begintime = self.start_from.strftime("%Y-%m-%d 00:00:00")
+		endtime = self.start_from.strftime("%Y-%m-%d 23:59:59")
+		frappe.errprint(begintime,endtime)
 
 @frappe.whitelist(allow_guest=True)
 def unit(pin, unit_number):

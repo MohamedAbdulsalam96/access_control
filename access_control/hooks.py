@@ -20,7 +20,7 @@ app_license = "MIT"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/access_control/css/access_control.css"
-web_include_js = "https://s3.amazonaws.com/plivosdk/web/plivo.min.js"
+# web_include_js = "https://s3.amazonaws.com/plivosdk/web/plivo.min.js"
                   #  "/files/static/jquery.js"]
 
 # Home Pages
@@ -82,23 +82,23 @@ web_include_js = "https://s3.amazonaws.com/plivosdk/web/plivo.min.js"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"access_control.tasks.all"
 # 	],
 # 	"daily": [
 # 		"access_control.tasks.daily"
 # 	],
-# 	"hourly": [
-# 		"access_control.tasks.hourly"
-# 	],
+ 	"all": [
+ 		"access_control.doctype.residential_unit.residential_unit.check_expired"
+ 	]
 # 	"weekly": [
 # 		"access_control.tasks.weekly"
 # 	]
 # 	"monthly": [
 # 		"access_control.tasks.monthly"
 # 	]
-# }
+}
 
 # Testing
 # -------

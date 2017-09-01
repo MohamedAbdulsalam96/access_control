@@ -8,15 +8,38 @@ from frappe.model.document import Document
 import uuid
 from xml.etree.ElementTree import Element, SubElement, Comment, tostring
 from random import randint
+import datetime
 
 class ResidentialUnit(Document):
 	def generate_pin(self):
 		frappe.errprint(self.exit_pin)
 		self.entry_pin = randint(10000, 99999)
 		self.start_from = frappe.utils.now()
-		begintime = self.start_from.strftime("%Y-%m-%d 00:00:00")
-		endtime = self.start_from.strftime("%Y-%m-%d 23:59:59")
-		frappe.errprint(begintime,endtime)
+		source_datetime = datetime.datetime.now()
+		eod = datetime.datetime(
+			year=source_datetime.year,
+			month=source_datetime.month,
+			day=source_datetime.day
+		) + datetime.timedelta(days=1, microseconds=-1)
+		self.expires_on=eod
+		frappe.errprint(self.entry_pin)
+		frappe.errprint(self.expires_on)
+		return 1
+		#self.save()
+
+def check_expired():
+	for d in frappe.db.sql("""select name, start_from, expires_on, expired
+			from `tabResidential Unit`
+			where expired = 0""", as_dict=1):
+
+		today = d.start_from#frappe.utils.now()
+		#frappe.errprint(today)
+		#frappe.errprint(d.start_from)
+		#frappe.errprint(d.expires_on)
+		frappe.errprint(frappe.utils.date_diff(today, d.expires_on))
+		if frappe.utils.date_diff(today, d.expires_on) >=1:
+			frappe.set_value("Residential Unit",d.name,"expired",1)
+
 
 @frappe.whitelist(allow_guest=True)
 def unit(pin, unit_number):

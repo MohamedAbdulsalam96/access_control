@@ -31,7 +31,7 @@ def check_expired():
 	frappe.logger().debug('Checking Expired pins...')
 	for d in frappe.db.sql("""select name, start_from, expires_on, expired
 			from `tabResidential Unit`
-			where expired = 0""", as_dict=1):
+			where expired = 0 and (start_from is not null or expires_on is not null) """, as_dict=1):
 
 		today = d.start_from#frappe.utils.now()
 		#frappe.errprint(today)

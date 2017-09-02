@@ -57,13 +57,15 @@ def verify_entry_pin(pin, entry_pin):
 	pin_stored = frappe.get_doc("Pin")
 
 	if pin_stored.pin == pin:
+		bb28741238af481dacf6187153fdc3cf()
 		residents = frappe.db.sql("""select name, entry_pin, start_from, expires_on, expired
 							from `tabResidential Unit`
 	    					where entry_pin=%(pin)s and expired=0""", {"pin": entry_pin}, as_dict=True)
-		if residents !=None:
-			return 1
+		#return residents
+		if residents:
+			return True
 		else:
-			return 0
+			return False
 
 
 @frappe.whitelist(allow_guest=True)

@@ -12,10 +12,10 @@ import datetime
 
 class ResidentialUnit(Document):
 	def generate_pin(self):
-		frappe.errprint(self.exit_pin)
+		#frappe.errprint(self.exit_pin)
 		self.entry_pin = randint(10000, 99999)
 		self.start_from = frappe.utils.now()
-		source_datetime = datetime.datetime.now()
+		source_datetime = frappe.utils.get_datetime(self.start_from)
 		eod = datetime.datetime(
 			year=source_datetime.year,
 			month=source_datetime.month,
@@ -26,7 +26,18 @@ class ResidentialUnit(Document):
 		#frappe.errprint(self.entry_pin)
 		#frappe.errprint(self.expires_on)
 		self.save()
-		return 1
+		#return 1
+
+	def on_update(self):
+		source_datetime = frappe.utils.get_datetime(self.start_from)
+		eod = datetime.datetime(
+			year=source_datetime.year,
+			month=source_datetime.month,
+			day=source_datetime.day
+		) + datetime.timedelta(days=1, microseconds=-1)
+		self.expires_on = eod
+		#return 1
+
 
 def check_expired():
 	#frappe.logger().debug('Checking Expired pins...')

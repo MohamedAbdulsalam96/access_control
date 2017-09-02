@@ -53,7 +53,7 @@ def check_expired():
 			#frappe.logger().debug('Pin flagged as expired on ' + d.name)
 
 @frappe.whitelist(allow_guest=True)
-def verify_enty_pin(pin, entry_pin):
+def verify_entry_pin(pin, entry_pin):
 	pin_stored = frappe.get_doc("Pin")
 
 	if pin_stored.pin == pin:

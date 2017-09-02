@@ -22,24 +22,37 @@ class ResidentialUnit(Document):
 			day=source_datetime.day
 		) + datetime.timedelta(days=1, microseconds=-1)
 		self.expires_on=eod
-		frappe.errprint(self.entry_pin)
-		frappe.errprint(self.expires_on)
+		self.expired = 0
+		#frappe.errprint(self.entry_pin)
+		#frappe.errprint(self.expires_on)
+		self.save()
 		return 1
-		#self.save()
 
 def check_expired():
-	frappe.logger().debug('Checking Expired pins...')
+	#frappe.logger().debug('Checking Expired pins...')
 	for d in frappe.db.sql("""select name, start_from, expires_on, expired
 			from `tabResidential Unit`
 			where expired = 0 and (start_from is not null or expires_on is not null) """, as_dict=1):
 
 		today = frappe.utils.now_datetime()
-		frappe.logger().debug(str(today) + "|" + str(d.start_from) + "|" + str(d.expires_on))
+		#frappe.logger().debug(str(today) + "|" + str(d.start_from) + "|" + str(d.expires_on))
 		if today> d.expires_on:
 			frappe.set_value("Residential Unit",d.name,"expired",1)
 			frappe.db.commit()
-			frappe.logger().debug('Pin flagged as expired on ' + d.name)
+			#frappe.logger().debug('Pin flagged as expired on ' + d.name)
 
+@frappe.whitelist(allow_guest=True)
+def verify_enty_pin(pin, entry_pin):
+	pin_stored = frappe.get_doc("Pin")
+
+	if pin_stored.pin == pin:
+		residents = frappe.db.sql("""select name, entry_pin, start_from, expires_on, expired
+							from `tabResidential Unit`
+	    					where entry_pin=%(pin)s and expired=0""", {"pin": entry_pin}, as_dict=True)
+		if residents !=None:
+			return 1
+		else:
+			return 0
 
 
 @frappe.whitelist(allow_guest=True)

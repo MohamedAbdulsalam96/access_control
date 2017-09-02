@@ -33,12 +33,9 @@ def check_expired():
 			from `tabResidential Unit`
 			where expired = 0 and (start_from is not null or expires_on is not null) """, as_dict=1):
 
-		today = d.start_from#frappe.utils.now()
-		frappe.logger().debug(today)
-		frappe.logger().debug(d.start_from)
-		frappe.logger().debug(d.expires_on)
-		frappe.errprint(frappe.utils.date_diff(today, d.expires_on))
-		if frappe.utils.date_diff(today, d.expires_on) >=1:
+		today = frappe.utils.now_datetime()
+		frappe.logger().debug(str(today) + "|" + str(d.start_from) + "|" + str(d.expires_on))
+		if today> d.expires_on:
 			frappe.set_value("Residential Unit",d.name,"expired",1)
 			frappe.db.commit()
 			frappe.logger().debug('Pin flagged as expired on ' + d.name)

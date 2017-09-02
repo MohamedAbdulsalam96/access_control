@@ -34,13 +34,15 @@ def check_expired():
 			where expired = 0 and (start_from is not null or expires_on is not null) """, as_dict=1):
 
 		today = d.start_from#frappe.utils.now()
-		#frappe.errprint(today)
-		#frappe.errprint(d.start_from)
-		#frappe.errprint(d.expires_on)
+		frappe.logger().debug(today)
+		frappe.logger().debug(d.start_from)
+		frappe.logger().debug(d.expires_on)
 		frappe.errprint(frappe.utils.date_diff(today, d.expires_on))
 		if frappe.utils.date_diff(today, d.expires_on) >=1:
 			frappe.set_value("Residential Unit",d.name,"expired",1)
 			frappe.db.commit()
+			frappe.logger().debug('Pin flagged as expired on ' + d.name)
+
 
 
 @frappe.whitelist(allow_guest=True)
